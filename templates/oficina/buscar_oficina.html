@@ -1,0 +1,66 @@
+{% extends "oficina/inicio_oficina.html" %} {% block titulo %} Buscar vehículo {% endblock %} 
+
+{% block body %}
+
+<h2 class="text-center">Buscador de artículos de oficina</h2>
+
+<h5>Buscar artículos</h5>
+<form class="row g-3" action="{% url 'buscar-oficina-dato' %}" method="post"> {% csrf_token %}
+    <div class="col-md-6">
+      <select class="form-select" aria-label="Default select example" id="campo_busqueda" name="campo_busqueda">
+        <option selected>Selecciona el campo a buscar</option>
+        <option value="name_article">Nombre de Articulo</option>
+        <option value="nro_article">Número de Articulo</option>
+        <option value="location">Ubicación</option>
+      </select>
+    </div>
+
+    <div class="row g-3">
+        <div class="col-6">   
+            <label for="modelo" class="form-label">Ingresa el dato a buscar</label>
+            <input type="text" class="form-control" id="dato_buscado" name="dato_buscado">
+        </div>     
+    </div>
+    <div class="col-12 mt-3">
+      <button type="submit" class="btn btn-primary">Buscar</button>
+    </div>
+</form>
+
+
+{% if articulos %}
+<table class="table mt-5">
+  <thead>
+    <tr>
+        <th scope="col">Numero de Articulo</th>
+        <th scope="col">Nombre articulo</th>
+        <th scope="col">Localización</th>
+        <th scope="col">Stock disponible</th>
+        <th scope="col">Descripción</th>
+      
+    </tr>
+  </thead>
+  <tbody>
+    {% for ar in articulos %}
+    <tr>
+        <td>{{ar.nro_article}}</td>
+        <td>{{ar.name_article}}</td>
+        <td>{{ar.location}}</td>
+        <td>{{ar.stock}}</td>
+        <td>{{ar.description}}</td>
+      <td>
+          <a href="{% url 'editar_oficina' ar.nro_article %}"><button class="btn btn-warning">Editar</button></a>
+          <a href="{% url 'eliminar_oficina' ar.nro_article%}"><button class="btn btn-danger">Eliminar</button></a>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% else %}
+
+  {% if 'msj' %}
+  <h5 class="text-center my-5">{{ msj }}</h5>
+  {% endif %}
+  
+{% endif %}
+
+{% endblock %}

@@ -1,0 +1,88 @@
+{% extends "vehiculo/inicio_vehiculo.html" %} {% block titulo %} Buscar vehículo {% endblock %} 
+
+{% block body %}
+
+<h2 class="text-center">Buscar vehiculos</h2>
+
+<h5>Buscar vehiculo por valor</h5>
+<form class="row g-3" action="buscar-vehiculo-dato" method="post"> {% csrf_token %}
+    <div class="col-md-6">
+      <label for="patente" class="form-label">Patente</label>
+      <select class="form-select" aria-label="Default select example" id="campo_busqueda" name="campo_busqueda">
+        <option selected>Selecciona el campo a buscar</option>
+        <option value="patente">Patente</option>
+        <option value="numero_chasis">Número chasis</option>
+        <option value="modelo">Modelo</option>
+        <option value="marca">Marca</option>
+      </select>
+    </div>
+
+    <div class="col-6">
+      <label for="modelo" class="form-label">Ingresa el valor a buscar</label>
+      <input type="text" class="form-control" id="dato_buscado" name="dato_buscado">
+    </div>
+    <div class="col-12 mt-3">
+      <button type="submit" class="btn btn-primary">Buscar vehículo/os</button>
+    </div>
+</form>
+
+<h5 class="mt-5">Buscar vehiculo por revisión técnica</h5>
+<form class="row g-3" action="buscar-vehiculo-fecha" method="post"> {% csrf_token %}
+  <div class="form-check">
+    <input class="form-check-input" type="radio" name="revision_vencer" id="revision_vencer" value="mes" checked>
+    <label class="form-check-label" for="revision_vencer">
+      Buscar vehículos con cuya revisión técnica se encuentre a un mes o menos de vencer
+    </label>
+  </div> 
+  <div class="form-check">
+    <input class="form-check-input" type="radio" name="revision_vencer" id="revisión_vencida" value="vencida">
+    <label class="form-check-label" for="revisión_vencida">
+      Buscar vehículo con revisión técnica vencida
+    </label>
+  </div> 
+  <div class="col-12 mt-3">
+    <button type="submit" class="btn btn-primary">Buscar vehículo/os</button>
+  </div>
+</form>
+
+{% if vehiculos %}
+<table class="table mt-5">
+  <thead>
+    <tr>
+      <th scope="col">Patente</th>
+      <th scope="col">N° Chasis</th>
+      <th scope="col">Marca</th>
+      <th scope="col">Modelo</th>
+      <th scope="col">Última revisión</th>
+      <th scope="col">Próxima revisión</th>
+      <th scope="col">Observaciones</th>
+      <th scope="col">Opciones</th>
+    </tr>
+  </thead>
+  {% for vehiculo in vehiculos  %}
+  <tbody>
+    <tr>
+      <td>{{vehiculo.patente}}</td>
+      <td>{{vehiculo.numero_chasis}}</td>
+      <td>{{vehiculo.marca}}</td>
+      <td>{{vehiculo.modelo}}</td>
+      <td>{{vehiculo.ultima_revision}}</td>
+      <td>{{vehiculo.proxima_revision}}</td>
+      <td>{{vehiculo.observaciones}}</td>
+      <td>
+          <a href="{% url 'editar-vehiculo' vehiculo.patente %}"><button class="btn btn-warning">Editar</button></a>
+          <a href="{% url 'eliminar-vehiculo' vehiculo.patente %}"><button class="btn btn-danger">Eliminar</button></a>
+      </td>
+    </tr>
+  </tbody>
+  {% endfor %}
+</table>
+{% else %}
+
+  {% if 'msj' %}
+  <h5 class="text-center my-5">{{ msj }}</h5>
+  {% endif %}
+  
+{% endif %}
+
+{% endblock %}

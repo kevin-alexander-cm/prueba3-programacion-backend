@@ -1,0 +1,36 @@
+{% extends "base.html" %} {% block titulo %} Actualización de Usuarios {% endblock %} {% block body %}
+<h1 class="text-center">Actualización de Usuarios</h1>
+
+<form class="row g-3" action="{% url 'editar_usuario' %}" method="post"> {% csrf_token %}
+        <div class="col-md-6">
+            <label for="username" class="form-label">Username</label>
+            <input type="text" class="form-control" id="username" name="username" readonly="yes" value="{{usu.username}}">
+        </div>
+        <div class="col-md-6">
+            <label for="password" class="form-label">Password</label>
+            <input type="text" class="form-control" id="password" name="password" value="{{usu.password}}">
+        </div>
+        <div class="col-6">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" class="form-control" id="email" name="email" value="{{usu.email}}">
+        </div>
+        <div class="col-6">
+            <label for="nombre" class="form-label">Nombre</label>
+            <input type="text" class="form-control" id="nombre" name="nombre" value="{{usu.nombre}}">
+        </div>
+        <div class="col-md-6">
+            <label for="perfil" class="form-label">Perfil</label>
+            <select class="form-select" aria-label="Default select example" id="perfil" name="perfil">
+              <option selected disabled>Selecciona el tipo de usuario</option>
+              <option value="0">Administrador general</option>
+              <option value="1">Administrador de oficina</option>
+              <option value="2">Administrador de vehículos </option>
+              <option value="3">Administrador de computación</option>
+            </select>
+        </div>
+    <div class="form-group py-5">
+        <button type="submit" class="btn btn-success btn-block">Actualizar</button>
+    </div>
+</form>
+
+{% endblock %}

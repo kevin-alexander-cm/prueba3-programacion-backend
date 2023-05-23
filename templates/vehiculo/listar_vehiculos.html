@@ -1,0 +1,48 @@
+{% extends "vehiculo/inicio_vehiculo.html" %} {% block titulo %} Vehículos Registrados {% endblock %} 
+
+{% block body %}
+
+<h2 class="text-center">Listado de Vehículos Registrados</h2>
+
+<button type="button"  class="btn btn-primary" onclick="document.location.href='form-registro'"> Registrar Vehiculo </button>
+
+<table class="table mt-5">
+    <thead>
+      <tr>
+        <th scope="col">Patente</th>
+        <th scope="col">N° Chasis</th>
+        <th scope="col">Marca</th>
+        <th scope="col">Modelo</th>
+        <th scope="col">Última revisión</th>
+        <th scope="col">Próxima revisión</th>
+        <th scope="col">Observaciones</th>
+        <th scope="col">Opciones</th>
+      </tr>
+    </thead>
+    {% if vehiculos %}
+    <tbody>
+      {% for vehiculo in vehiculos  %}
+      <tr>
+        <td>{{vehiculo.patente}}</td>
+        <td>{{vehiculo.numero_chasis}}</td>
+        <td>{{vehiculo.marca}}</td>
+        <td>{{vehiculo.modelo}}</td>
+        <td>{{vehiculo.ultima_revision}}</td>
+        <td>{{vehiculo.proxima_revision}}</td>
+        <td>{{vehiculo.observaciones}}</td>
+        <td>
+            <a href="{% url 'editar-vehiculo' vehiculo.patente %}"><button class="btn btn-warning">Editar</button></a>
+            <a href="{% url 'eliminar-vehiculo' vehiculo.patente %}"><button class="btn btn-danger">Eliminar</button></a>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+    {% else %}
+    <tbody>
+        <tr>
+          <td scope="row" colspan="8" class="text-center">No se encontraron vehiculos registrados</td>
+    </tbody>
+    {% endif %}
+</table>
+
+  {% endblock %}

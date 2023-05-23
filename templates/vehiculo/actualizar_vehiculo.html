@@ -1,0 +1,39 @@
+{% extends "vehiculo/inicio_vehiculo.html" %} {% block titulo %} Actualizar Vehículo {% endblock %} 
+
+
+{% block body %}
+<h2 class="my-4 text-center">Registro de Vehículos</h2>
+<form class="row g-3" action="{% url 'editar-vhcl' %}" method="post"> {% csrf_token %}
+    <div class="col-md-6">
+      <label for="patente" class="form-label">Patente</label>
+      <input type="text" class="form-control" id="patente" name="patente" value="{{ vhcl.patente }}">
+    </div>
+    <div class="col-md-6">
+      <label for="numero_chasis" class="form-label">Número Chasis</label>
+      <input type="text" class="form-control" id="numero_chasis" name="numero_chasis" value="{{ vhcl.numero_chasis }}">
+    </div>
+    <div class="col-6">
+      <label for="marca" class="form-label">Marca</label>
+      <input type="text" class="form-control" id="marca" name="marca" value="{{ vhcl.marca }}">
+    </div>
+    <div class="col-6">
+      <label for="modelo" class="form-label">Modelo</label>
+      <input type="text" class="form-control" id="modelo" name="modelo" value="{{ vhcl.modelo }}">
+    </div>
+    <div class="col-md-6">
+      <label for="ultima_revision" class="form-label">Ultima Revisión</label>
+      <input type="date" class="form-control" id="ultima_revision" name="ultima_revision" value="{{ vhcl.ultima_revision }}">
+    </div>
+    <div class="col-md-6">
+      <label for="proxima_revision" class="form-label">Próximo Revisión</label>
+      <input type="date" class="form-control" id="proxima_revision" name="proxima_revision" value="{{ vhcl.proxima_revision }}">
+    </div>
+    <div class="col-12">
+        <label for="observaciones" class="form-label">Observaciones</label>
+        <textarea class="form-control" name="observaciones" id="observaciones" cols="30" rows="10">{{ vhcl.observaciones }}</textarea>
+    </div>
+    <div class="col-12 mt-3">
+      <button type="submit" class="btn btn-primary">Actualizar vehículo</button>
+    </div>
+</form>
+{% endblock %}

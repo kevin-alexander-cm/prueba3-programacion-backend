@@ -1,0 +1,35 @@
+{% extends "oficina/inicio_oficina.html" %} {% block titulo %} Actualización de Articulos {% endblock %} {% block body %}
+<h1>Actualización de Articulos</h1>
+
+<h1>{{msj}}</h1>
+<form action="{% url 'ofi' %}" method="post"> {% csrf_token %}
+    <table>
+        <tr>
+            <td>Numero del Articulo</td>
+            <td><input type="text" name="nro_article" readonly="yes" value="{{ofi.nro_article}}"/></td>
+        </tr>
+        <tr>
+            <td>Nombre del Articulo</td>
+            <td><input type="text" name="name_article" value="{{ofi.name_article}}"/></td>
+        </tr>
+        <tr>
+            <td>Localización</td>
+            <td><input type="text" name="location" value="{{ofi.location}}"/></td>
+        </tr>
+        <tr>
+            <td>stock</td>
+            <td><input type="text" name="stock" value="{{ofi.stock}}"/></td>
+        </tr>
+        <tr>
+            <td>Descripción</td>
+            <td><input type="text" name="description" value="{{ofi.description}}"/></td>
+        </tr>
+        
+    </table>
+    <div class="form-group py-5">
+        <button type="submit" class="btn btn-success btn-block">Actualizar</button>
+        <button type="button" class="btn btn-danger btn-block" onclick="document.location.href='inicio'">Cancelar</button>
+    </div>
+</form>
+</div>
+{% endblock %}

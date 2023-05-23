@@ -1,0 +1,49 @@
+{% extends "computacion/inicio_computacion.html" %} {% block titulo %} Articulos Registrados {% endblock %} 
+
+{% block body %}
+
+{% if msj %}
+  <div class="alert alert-success mt-4" role="alert"> {{ msj }} </div>
+{% endif %}
+
+<h2 class="text-center">Listado de Articulos de oficiina</h2>
+
+<button type="button"  class="btn btn-primary" onclick="document.location.href='registrar_oficina'"> Crear Articulo</button>
+
+<table class="table mt-5">
+    <thead>
+      <tr>
+        <th scope="col">Numero de insumo</th>
+        <th scope="col">Nombre de insumo</th>
+        <th scope="col">Marca</th>
+        <th scope="col">fecha de adquisicion</th>       
+        <th scope="col">Stock disponible</th>
+        <th scope="col">Descripción</th>
+      </tr>
+    </thead>
+    {% if insumos %}
+    {% for ins in insumos %}
+    <tbody>
+      <tr>
+        <td>{{ins.nro_insumo}}</td>
+        <td>{{ins.name_insumo}}</td>
+        <td>{{ins.fecha_adquisicion}}</td>
+        <td>{{ins.marca}}</td>
+        <td>{{ins.stock}}</td>
+        <td>{{ins.description}}</td>
+        <td>
+          <a href="{% url 'editar_computacion' ins.nro_insumo %}"><button class="btn btn-warning">Editar</button></a>
+          <a href="{% url 'eliminar_computacion' ins.nro_insumo %}"><button class="btn btn-danger">Eliminar</button></a>
+        </td>
+      </tr>
+    </tbody>
+    {% endfor %}
+    {% else %}
+    <tbody>
+        <tr>
+          <td scope="row" colspan="8" class="text-center">No se encontraron vehiculos registrados</td>
+    </tbody>
+    {% endif %}
+</table>
+
+  {% endblock %}

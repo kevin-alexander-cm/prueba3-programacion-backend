@@ -1,0 +1,33 @@
+{% extends "base.html" %} {% block titulo %} Admin {% endblock %} 
+
+{% block body %}
+<h2 class="text-center">Bienvenidos Ingreso de Usuarios</h2>
+
+{% if msj %}
+    <div class="alert alert-danger" role="alert">
+        {{msj}}
+    </div>
+{% endif %}
+
+<br>
+<div class="row align-items-center mx-auto">
+    <div class="col-3 mx-auto">
+        <form action="{% url 'iniciar_sesion' %}" method="post">{% csrf_token %}
+            <div class="mb-6">
+                <label for="exampleInputEmail1" class="form-label">Username</label>
+                <input type="text" class="form-control" id="username" name="username" aria-describedby="emailHelp">
+            </div>
+            <div class="mb-6">
+                <label for="exampleInputPassword1" class="form-label">Password</label>
+                <input type="password" class="form-control" id="password" name="password">
+            </div>
+            <br>
+            <button type="submit" class="btn btn-primary">Ingresar</button>
+        </form>
+    </div>
+</div>
+    
+
+
+
+{% endblock %}

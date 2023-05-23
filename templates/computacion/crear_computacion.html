@@ -1,0 +1,35 @@
+{% extends "computacion/inicio_computacion.html" %} {% block titulo %} Registrar Computación {% endblock %} 
+
+{% block body %}
+<h2 class="my-4 text-center">Registro de Computación</h2>
+<form class="row g-3" action="crear_computacion" method="post"> {% csrf_token %}
+
+    <div class="col-md-6">
+      <label for="nro_insumo" class="form-label">Numero del Articulo</label>
+      <input type="text" class="form-control" id="nro_insumo" name="nro_insumo">
+    </div>
+    <div class="col-md-6">
+      <label for="name_insumo" class="form-label">Nombre del Articulo</label>
+      <input type="text" class="form-control" id="name_insumo" name="name_insumo">
+    </div>
+    <div class="col-6">
+      <label for="fecha_adquisicion" class="form-label">Localización</label>
+      <input type="date" class="form-control" id="fecha_adquisicion" name="fecha_adquisicion">
+    </div>
+      <div class="col-6">
+      <label for="marca" class="form-label">marca</label>
+      <input type="text" class="form-control" id="marca" name="marca">
+    </div>
+    <div class="col-6">
+      <label for="stock" class="form-label">Stock</label>
+      <input type="text" class="form-control" id="stock" name="stock">
+    </div>
+    <div class="col-md-12">
+      <label for="description" class="form-label">Descripción</label>
+      <input type="text" class="form-control" id="description" name="description">
+    </div>
+    <div class="col-12 mt-3">
+      <button type="submit" class="btn btn-primary">Registrar </button>
+    </div>
+</form>
+{% endblock %}

@@ -1,0 +1,47 @@
+{% extends "oficina/inicio_oficina.html" %} {% block titulo %} Articulos Registrados {% endblock %} 
+
+{% block body %}
+
+{% if msj %}
+  <div class="alert alert-success mt-4" role="alert"> {{ msj }} </div>
+{% endif %}
+
+<h2 class="text-center">Listado de Articulos de oficiina</h2>
+
+<button type="button"  class="btn btn-primary" onclick="document.location.href='registrar_oficina'"> Crear Articulo</button>
+
+<table class="table mt-5">
+    <thead>
+      <tr>
+        <th scope="col">Numero de Articulo</th>
+        <th scope="col">Nombre articulo</th>
+        <th scope="col">Localización</th>
+        <th scope="col">Stock disponible</th>
+        <th scope="col">Descripción</th>
+      </tr>
+    </thead>
+    {% if articulos %}
+    {% for ar in articulos %}
+    <tbody>
+      <tr>
+        <td>{{ar.nro_article}}</td>
+        <td>{{ar.name_article}}</td>
+        <td>{{ar.location}}</td>
+        <td>{{ar.stock}}</td>
+        <td>{{ar.description}}</td>
+        <td>
+          <a href="{% url 'editar_oficina' ar.nro_article %}"><button class="btn btn-warning">Editar</button></a>
+          <a href="{% url 'eliminar_oficina' ar.nro_article%}"><button class="btn btn-danger">Eliminar</button></a>
+        </td>
+      </tr>
+    </tbody>
+    {% endfor %}
+    {% else %}
+    <tbody>
+        <tr>
+          <td scope="row" colspan="8" class="text-center">No se encontraron vehiculos registrados</td>
+    </tbody>
+    {% endif %}
+</table>
+
+  {% endblock %}

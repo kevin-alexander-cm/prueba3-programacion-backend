@@ -1,0 +1,47 @@
+{% extends "base.html" %} {% block titulo %} Usuarios Registrados {% endblock %} 
+
+{% block body %}
+
+{% if msj %}
+  <div class="alert alert-success mt-4" role="alert"> {{ msj }} </div>
+{% endif %}
+
+<h2 class="text-center">Listado de Usuarios Registrados</h2>
+
+<button type="button"  class="btn btn-primary" onclick="document.location.href='registrar-usuario'"> Registrar Usuario</button>
+
+<table class="table mt-5">
+    <thead>
+      <tr>
+        <th scope="col">Username</th>
+        <th scope="col">Password</th>
+        <th scope="col">Email</th>
+        <th scope="col">Nombre</th>
+        <th scope="col">Perfil</th>
+      </tr>
+    </thead>
+    {% if usuarios %}
+    {% for us in usuarios %}
+    <tbody>
+      <tr>
+        <td>{{us.username}}</td>
+        <td>{{us.password}}</td>
+        <td>{{us.email}}</td>
+        <td>{{us.nombre}}</td>
+        <td>{{us.perfil}}</td>
+        <td>
+          <a href="{% url 'actualizar_usuario' us.username %}"><button class="btn btn-warning">Editar</button></a>
+          <a href="{% url 'eliminar_usuario' us.username %}"><button class="btn btn-danger">Eliminar</button></a>
+        </td>
+      </tr>
+    </tbody>
+    {% endfor %}
+    {% else %}
+    <tbody>
+        <tr>
+          <td scope="row" colspan="8" class="text-center">No se encontraron usuarios registrados</td>
+    </tbody>
+    {% endif %}
+</table>
+
+  {% endblock %}
